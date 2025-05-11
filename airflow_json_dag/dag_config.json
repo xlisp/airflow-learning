@@ -1,0 +1,39 @@
+{
+  "dag_id": "json_example_dag",
+  "description": "这是从JSON生成的示例DAG",
+  "schedule_interval": "@daily",
+  "tasks": [
+    {
+      "task_id": "开始",
+      "type": "empty"
+    },
+    {
+      "task_id": "准备数据",
+      "type": "bash",
+      "bash_command": "echo '准备数据中...'",
+      "dependencies": ["开始"]
+    },
+    {
+      "task_id": "处理数据",
+      "type": "python",
+      "dependencies": ["准备数据"]
+    },
+    {
+      "task_id": "生成报告",
+      "type": "bash",
+      "bash_command": "echo '生成报告中...'",
+      "dependencies": ["处理数据"]
+    },
+    {
+      "task_id": "发送通知",
+      "type": "bash",
+      "bash_command": "echo '发送通知中...'",
+      "dependencies": ["生成报告"]
+    },
+    {
+      "task_id": "结束",
+      "type": "empty",
+      "dependencies": ["发送通知"]
+    }
+  ]
+}
